@@ -1,0 +1,114 @@
+@startuml
+title Диаграмма типов и интерфейсов приложения EmployeeValue
+
+skinparam classAttributeIconSize 0
+
+package "model" {
+
+    class EmployeeData {
+        - salary : double
+        - workingHours : double
+        - actualHours : double
+        + EmployeeData(salary : double, workingHours : double, actualHours : double)
+        + getSalary() : double
+        + getWorkingHours() : double
+        + getActualHours() : double
+    }
+
+    class EmployeeResult {
+        - hourlyCost : double
+        - clickCost : double
+        - codeLineCost : double
+        - sighCost : double
+        + EmployeeResult(hourlyCost : double, clickCost : double, codeLineCost : double, sighCost : double)
+        + getHourlyCost() : double
+        + getClickCost() : double
+        + getCodeLineCost() : double
+        + getSighCost() : double
+    }
+
+    interface ModelListener {
+        + modelChanged(data : EmployeeData, result : EmployeeResult) : void
+    }
+
+    class EmployeeModel {
+        - CLICKS_PER_HOUR : double
+        - CODE_LINES_PER_HOUR : double
+        - SIGHS_PER_HOUR : double
+        - listeners : List<ModelListener>
+        - data : EmployeeData
+        - result : EmployeeResult
+        + addListener(listener : ModelListener) : void
+        + getData() : EmployeeData
+        + getResult() : EmployeeResult
+        + setData(data : EmployeeData) : void
+        - validate(data : EmployeeData) : void
+        - notifyListeners() : void
+    }
+
+    EmployeeModel o-- "0..*" ModelListener
+    EmployeeModel --> EmployeeData
+    EmployeeModel --> EmployeeResult
+    ModelListener --> EmployeeData
+    ModelListener --> EmployeeResult
+}
+
+package "view" {
+
+    class MainView {
+        - salaryLabel : JLabel
+        - workingHoursLabel : JLabel
+        - actualHoursLabel : JLabel
+        - hourlyCostLabel : JLabel
+        - clickCostLabel : JLabel
+        - codeLineCostLabel : JLabel
+        - sighCostLabel : JLabel
+        - inputButton : JButton
+        + MainView()
+        + getInputButton() : JButton
+        + modelChanged(data : EmployeeData, result : EmployeeResult) : void
+    }
+
+    class InputDialog {
+        - salaryField : JTextField
+        - workingHoursField : JTextField
+        - actualHoursField : JTextField
+        - result : EmployeeData
+        + InputDialog(parent : MainView, previousData : EmployeeData)
+        - saveData() : void
+        - parseNumber(text : String) : double
+        + getResult() : EmployeeData
+    }
+
+    MainView ..|> ModelListener
+    InputDialog --> MainView
+    InputDialog --> EmployeeData
+}
+
+package "controller" {
+
+    class EmployeeController {
+        - model : EmployeeModel
+        - view : MainView
+        + EmployeeController(model : EmployeeModel, view : MainView)
+        - openInputDialog() : void
+    }
+
+    EmployeeController --> EmployeeModel
+    EmployeeController --> MainView
+    EmployeeController --> InputDialog
+    EmployeeController --> EmployeeData
+}
+
+package "application" {
+
+    class Main {
+        + main(args : String[]) : void
+    }
+
+    Main --> EmployeeModel
+    Main --> MainView
+    Main --> EmployeeController
+}
+
+@enduml

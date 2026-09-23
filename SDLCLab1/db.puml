@@ -1,0 +1,104 @@
+@startuml
+hide circle
+skinparam linetype ortho
+
+entity "Автомобиль" as Car {
+    * id_автомобиля : INT
+    --
+    госномер : VARCHAR
+    марка : VARCHAR
+    модель : VARCHAR
+    год_выпуска : INT
+    статус : VARCHAR
+}
+
+entity "Водитель" as Driver {
+    * id_водителя : INT
+    --
+    ФИО : VARCHAR
+    телефон : VARCHAR
+    номер_прав : VARCHAR
+    категория : VARCHAR
+    дата_приема : DATE
+}
+
+entity "Клиент" as Client {
+    * id_клиента : INT
+    --
+    ФИО : VARCHAR
+    телефон : VARCHAR
+    email : VARCHAR
+    дата_регистрации : DATE
+    адрес : VARCHAR
+}
+
+entity "Заказ" as Order {
+    * id_заказа : INT
+    --
+    дата_время : DATETIME
+    адрес_подачи : VARCHAR
+    адрес_назначения : VARCHAR
+    статус : VARCHAR
+    стоимость : DECIMAL
+}
+
+entity "Маршрут" as Route {
+    * id_маршрута : INT
+    --
+    начальная_точка : VARCHAR
+    конечная_точка : VARCHAR
+    расстояние : DECIMAL
+    время_в_пути : INT
+    описание : VARCHAR
+}
+
+entity "Техническое обслуживание" as Maintenance {
+    * id_обслуживания : INT
+    --
+    дата : DATE
+    вид_работ : VARCHAR
+    описание : VARCHAR
+    стоимость : DECIMAL
+    пробег : INT
+}
+
+entity "Технический паспорт" as Passport {
+    * id_паспорта : INT
+    --
+    серия : VARCHAR
+    номер : VARCHAR
+    VIN : VARCHAR
+    дата_выдачи : DATE
+    номер_двигателя : VARCHAR
+}
+
+entity "Тариф" as Tariff {
+    * id_тарифа : INT
+    --
+    название : VARCHAR
+    стоимость_посадки : DECIMAL
+    стоимость_км : DECIMAL
+    стоимость_минуты : DECIMAL
+    дата_начала_действия : DATE
+}
+
+entity "Закрепление автомобиля" as DriverCar {
+    * id_закрепления : INT
+    --
+    дата_начала : DATE
+    дата_окончания : DATE
+    смена : VARCHAR
+}
+
+Driver ||--o{ DriverCar : закрепляется
+Car ||--o{ DriverCar : используется
+
+Car ||--|| Passport : имеет
+Car ||--o{ Maintenance : проходит
+
+Driver ||--o{ Order : выполняет
+Client ||--o{ Order : оформляет
+Route ||--o{ Order : используется_в
+Tariff ||--o{ Order : рассчитывается_по
+
+@enduml
