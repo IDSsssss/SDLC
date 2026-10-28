@@ -78,9 +78,9 @@ GoalJar — автономное настольное приложение на 
 | № | Название | Владелец | Версия/дата | Расположение | Тип |
 |---|----------|----------|-------------|--------------|-----|
 | 1 | ISO/IEC/IEEE 29148 | ISO/IEC/IEEE | 2018 | https://www.iso.org | Справочная |
-| 2 | Шаблон `srs-template.md` | {{ФИО}} | — | `srs/srs-template.md` | Нормативная |
-| 3 | Макеты MOCK-01…04 (PNG) | {{ФИО}} | 0.2 | `srs/mockups/` | Справочная |
-| 4 | Модель SysML v2 | {{ФИО}} | 0.2 | `srs/sysml/goaljar.sysml` | Справочная |
+| 2 | Шаблон `srs-template.md` | IDSsssss | — | `srs/srs-template.md` | Нормативная |
+| 3 | Макеты MOCK-01…04 (PNG) | IDSsssss | 0.2 | `srs/mockups/` | Справочная |
+| 4 | Модель SysML v2 | IDSsssss | 0.2 | `srs/sysml/goaljar.sysml` | Справочная |
 
 ### 1.5 Обзор документа {#15-document-overview}
 
