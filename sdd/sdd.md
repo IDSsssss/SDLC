@@ -200,6 +200,7 @@ public BigDecimal calculateMonthlyPlan(Goal goal, List<Deposit> deposits) {
 
     return remaining.divide(BigDecimal.valueOf(activeMonths), 0, RoundingMode.CEILING);
 }
+```
 
 ---
 
