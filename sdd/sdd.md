@@ -151,6 +151,7 @@ CREATE TABLE excluded_month (
     UNIQUE(goal_id, month)
 );
 
+---
 ### 3.5 VIEW-INTF: Спецификация экранов
 - **ID:** VIEW-INTF-001
 - **Адресуемые требования SRS:** REQ-INT-002, REQ-INT-003, REQ-FUNC-006.
