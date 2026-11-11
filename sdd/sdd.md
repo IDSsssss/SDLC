@@ -149,7 +149,8 @@ CREATE TABLE excluded_month (
     month TEXT NOT NULL, -- YYYY-MM
     FOREIGN KEY(goal_id) REFERENCES goal(id) ON DELETE CASCADE,
     UNIQUE(goal_id, month)
-);```
+);
+```
 
 ---
 ### 3.5 VIEW-INTF: Спецификация экранов
